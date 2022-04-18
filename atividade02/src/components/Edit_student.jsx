@@ -4,25 +4,33 @@ import { students } from "./data_student";
 
 const Edit_student = () => {
     const [name, setName] = useState("");
-    const [university, setUniversity] = useState("");
-    const [degree, setDegree] = useState("");
+    const [course, setCourse] = useState("");
+    const [ira, setIra] = useState(0);
 
     const params = useParams();
 
     useEffect(() => {
         const student = students[params.id];
         setName(student.name);
-        setUniversity(student.university);
-        setDegree(student.degree);
+        setCourse(student.course);
+        setIra(student.ira);
     }, [params.id]);
 
     const handleSubmit = (event) => {
-        alert(`Nome: ${name} \nUniversidade: ${university}\nTitulação: ${degree}`);
+        event.preventDefault()
+        students.map((student, i) => { 
+            if(student.id == params.id) {
+                student.name = name;
+                student.course = course;
+                student.ira = ira;
+            }
+        })
+        alert("Dados de estudante atualizados com sucesso.");
     };
 
     return (
         <div>
-        <h2 style={{ textAlign: "center" }}>Edit student</h2>
+        <h2 style={{ textAlign: "center" }}>Edit Student</h2>
         <form onSubmit={handleSubmit}>
             <div className="form-group">
             <label>Name</label>
@@ -35,23 +43,23 @@ const Edit_student = () => {
             />
             </div>
             <div className="form-group">
-            <label>University</label>
+            <label>Course</label>
             <input
                 type="text"
                 className="form-control"
-                value={university ?? ""}
-                name="university"
-                onChange={(event) => setUniversity(event.target.value)}
+                value={course ?? ""}
+                name="course"
+                onChange={(event) => setCourse(event.target.value)}
             />
             </div>
             <div className="form-group">
-            <label>Degree</label>
+            <label>IRA</label>
             <input
                 type="text"
                 className="form-control"
-                value={degree ?? ""}
-                name="degree"
-                onChange={(event) => setDegree(event.target.value)}
+                value={ira ?? 0}
+                name="ira"
+                onChange={(event) => setIra(event.target.value)}
             />
             </div>
             <div
@@ -64,7 +72,7 @@ const Edit_student = () => {
             >
             <input
                 type="submit"
-                value="Edit student "
+                value="Edit Student"
                 className="btn btn-primary"
             />
             </div>

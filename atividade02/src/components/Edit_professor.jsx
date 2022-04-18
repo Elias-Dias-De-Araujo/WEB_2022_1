@@ -17,7 +17,15 @@ const Edit_professor = () => {
     }, [params.id]);
 
     const handleSubmit = (event) => {
-        alert(`Nome: ${name} \nUniversidade: ${university}\nTitulação: ${degree}`);
+        event.preventDefault()
+        professors.map((professor, i) => { 
+            if(professor.id == params.id) {
+                professor.name = name
+                professor.university = university
+                professor.degree = degree
+            }
+        })
+        alert("Dados de professor atualizados com sucesso.");
     };
 
     return (

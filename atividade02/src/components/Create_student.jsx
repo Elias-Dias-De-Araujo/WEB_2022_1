@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { students } from "./data_student";
 
 const Create_student = () => {
     const [name, setName] = useState("");
@@ -6,7 +7,25 @@ const Create_student = () => {
     const [ira, setIra] = useState(0);
 
     const handleSubmit = (event) => {
-        alert(`Nome: ${name} \nCurso: ${course}\nIRA: ${ira}`);
+        event.preventDefault()
+        const identifier = students.length;
+        students.push(
+            {
+                id: identifier,
+                name: name,
+                course: course,
+                ira: ira,
+            }
+        )
+        
+        students.map((student, i) => { 
+            if(student.id == identifier) {
+                student.name = name;
+                student.course = course;
+                student.ira = ira;
+            }
+        })
+        alert("Estudante Criado com sucesso.");
     };
 
     return (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { professors } from "./data_professor";
 
 const Create_professor = () => {
     const [name, setName] = useState("");
@@ -6,7 +7,26 @@ const Create_professor = () => {
     const [degree, setDegree] = useState(0);
 
     const handleSubmit = (event) => {
-        alert(`Nome: ${name} \nUniversidade: ${university}\nTitulação: ${degree}`);
+        event.preventDefault()
+        const identifier = professors.length;
+        professors.push(
+            {
+                id: identifier,
+                name: name,
+                university: university,
+                degree: degree,
+            }
+        )
+        
+        professors.map((professor, i) => { 
+            if(professor.id == identifier) {
+                professor.name = name;
+                professor.university = university;
+                professor.degree = degree;
+            }
+        })
+
+        alert("Professor Criado com sucesso.");
     };
 
     return (

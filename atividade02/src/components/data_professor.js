@@ -15,13 +15,13 @@ const professors = [
         id: 2,
         name: "Cristiano Bacelar de Oliveira",
         university: "Universidade Estadual do Ceará",
-        degree: "Bacharelado",
+        degree: "Doutorado",
     },
     {
         id: 3,
         name: "Criston Pereira de Souza",
         university: "Universidade Federal do Ceará",
-        degree: "Bacharelado",
+        degree: "Doutorado",
     },
   ];
   
