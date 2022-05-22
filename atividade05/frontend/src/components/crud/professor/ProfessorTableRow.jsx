@@ -1,0 +1,46 @@
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const ProfessorTableRow = (props) => {
+    const { id, name, university, degree } = props.professor
+    const navigate = useNavigate();
+
+    function deleteProfessor() {
+        if (window.confirm(`Deseja excluir o elemento de ID: ${id}?`)) {
+            axios.delete(`http://localhost:3002/crud/professors/delete/${id}`)
+                .then(
+                    response => props.deleteProfessorById(id),
+                    navigate("/listProfessor")
+                    )
+                .catch(error => console.log(error))
+
+        }
+
+    }
+
+    return (
+        <tr>
+            <td>
+                {id}
+            </td>
+            <td>
+                {name}
+            </td>
+            <td>
+                {university}
+            </td>
+            <td>
+                {degree}
+            </td>
+            <td style={{ textAlign: "center" }}>
+                <Link to={`/editProfessor/${id}`} className="btn btn-primary">Editar</Link>
+            </td>
+            <td style={{ textAlign: "center" }}>
+                <button className="btn btn-danger" onClick={() => deleteProfessor()}>Apagar</button>
+            </td>
+        </tr>
+    )
+}
+
+export default ProfessorTableRow
