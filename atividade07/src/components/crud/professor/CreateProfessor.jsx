@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
-//import axios from "axios";
 
 import FirebaseContext from "../../../utils/FirebaseContext";
 import FirebaseProfessorService from "../../../services/FirebaseProfessorService";
@@ -25,7 +24,7 @@ const CreateProfessorPage = ({setShowToast,setToast}) =>
 function CreateProfessor(props) {
 
     const [name, setName] = useState("")
-    const [university, setuniversity] = useState("")
+    const [university, setUniversity] = useState("")
     const [degree, setDegree] = useState(0)
     const [validate,setValidate] = useState({name:'',university:'',degree:''})
     const [loading, setLoading] = useState(false)
@@ -101,7 +100,7 @@ function CreateProfessor(props) {
                     <div className="form-group">
                         <label>Nome: </label>
                         <input type="text"
-                            className="form-control"
+                            className={`form-control ${validate.name}`}
                             value={(name == null || name === undefined) ? "" : name}
                             name="name"
                             onChange={(event) => { setName(event.target.value) }} />
@@ -109,7 +108,7 @@ function CreateProfessor(props) {
                     <div className="form-group">
                         <label>Universidade: </label>
                         <input type="text"
-                            className="form-control"
+                            className={`form-control ${validate.university}`}
                             value={university ?? ""}
                             name="university"
                             onChange={(event) => { setUniversity(event.target.value) }} />
@@ -117,7 +116,7 @@ function CreateProfessor(props) {
                     <div className="form-group">
                         <label>Titulação: </label>
                         <input type="text"
-                            className="form-control"
+                            className={`form-control ${validate.degree}`}
                             value={degree ?? 0}
                             name="degree"
                             onChange={(event) => { setDegree(event.target.value) }} />
